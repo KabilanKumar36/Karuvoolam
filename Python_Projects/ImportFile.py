@@ -1,14 +1,17 @@
+#!/usr/bin/env python3
 import os
 import meshio
 
-input_vtk_file = "E:\\C\\WS\\Python_Projects\\TestCases\\Input\\maillage.vtu"
-current_dir = "E:\\C\\WS\\Python_Projects\\TestCases\\Output"
+#input_vtk_file = "E:\\C\\WS\\Python_Projects\\TestCases\\Input\\maillage.vtu"
+input_vtk_file = "/home/ubuntu/Public/Kabilan/WS/TestCase/maillage.vtu"
+#current_dir = "E:\\C\\WS\\Python_Projects\\TestCases\\Output"
+current_dir = "/home/ubuntu/Public/Kabilan/WS/TestCase/output"
 solver_template = "Nastran"
 
 
 mesh = meshio.read(input_vtk_file)
 
-def writepointdatafile(filepath):    
+def writepointdatafile(filepath):
     output_point_file_path = filepath
     output_points_file = open(output_point_file_path, 'w')
     count = 1
@@ -19,7 +22,7 @@ def writepointdatafile(filepath):
         output_points_file.write("GRID,"+str(count)+","+x_coordinate+","+y_coordinate+","+z_coordinate+"\n")
         count += 1
     output_points_file.close()
-    
+
 def writehexaelementdatafile(filepath):
     output_point_file_path = filepath
     output_points_file = open(output_point_file_path, 'w')
@@ -38,7 +41,7 @@ def writehexaelementdatafile(filepath):
             nodeID8 = str(hexa[7]+1)
             output_points_file.write("HEXA,"+str(count)+","+nodeID1+","+nodeID2+","+nodeID3+","+nodeID4+","+nodeID5+","+nodeID6+","+nodeID7+","+nodeID8+"\n")
             count = count+1
-        
+
     output_points_file.close()
 
 def deletefile(filepath):
